@@ -2,8 +2,6 @@ import peewee
 from peewee import *
 from uuid import uuid4
 
-#db = PostgresqlDatabase('database', user='postgres', host='localhost', port=5432, password='docker')
-
 DATABASE = 'infra/database.db'
 database = SqliteDatabase(DATABASE)
 
