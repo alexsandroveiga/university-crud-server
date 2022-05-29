@@ -3,8 +3,10 @@ from json import *
 
 def adapt_flask_route(controller):
   response = controller.handle(request)
-  if (response['statusCode'] == 200 or response['statusCode'] == 201):
-    json = response['data']
+  if (response['statusCode'] == 200):
+    json = dumps(response['data'], default=str)
+  elif (response['statusCode'] == 201): 
+    json = ''
   else:
-    json = { 'error': response['data'] }
-  return Response(dumps(json, default=str), mimetype='application/json', status=response['statusCode'], headers=response['headers'])
+    json = dumps({ 'error': response['data'] }, default=str)
+  return json, response['statusCode'], response['headers']

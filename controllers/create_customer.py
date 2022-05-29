@@ -1,6 +1,13 @@
 from infra import *
-from helpers import ok
+from controllers import Controller
+from helpers import *
 
-class CreateCustomerController:
-  def handle(self, request):
-    return ok(Customer.create(**request.json).__data__)
+class CreateCustomerController(Controller):
+  def perform(self, request):
+    try:
+      customer = Customer.select().where(Customer.email == request.json['email']).execute()
+      if customer:
+        raise(Exception('Customer already exists'))
+      return ok(Customer.create(**request.json).__data__)
+    except Exception as error:
+      return bad_request(str(error))

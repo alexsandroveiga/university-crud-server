@@ -1,9 +1,10 @@
 import math
+from controllers import Controller
 from infra import *
 from helpers import ok
 
-class ListCustomersController:
-  def handle(self, request):
+class ListCustomersController(Controller):
+  def perform(self, request):
     page = request.args.get("page", default=1, type=int)
     per_page = request.args.get("per_page", default=10, type=int)
     offset = (page - 1) * per_page

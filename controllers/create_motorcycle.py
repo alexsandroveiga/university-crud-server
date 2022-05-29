@@ -1,6 +1,7 @@
 from infra import *
+from controllers import Controller
 from helpers import ok
 
-class CreateMotorcycleController:
-  def handle(self, request):
+class CreateMotorcycleController(Controller):
+  def perform(self, request):
     return ok(Motorcycle.create(**request.json).__data__)
