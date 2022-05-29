@@ -3,7 +3,7 @@ from json import *
 
 def adapt_flask_route(controller):
   response = controller.handle(request)
-  if (response['statusCode'] == 200):
+  if (response['statusCode'] == 200 or response['statusCode'] == 201):
     json = response['data']
   else:
     json = { 'error': response['data'] }

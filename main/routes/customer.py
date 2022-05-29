@@ -11,4 +11,8 @@ def route(app: Flask):
   @app.route('/customers', methods=['GET'])
   def customer_read():
     return adapt_flask_route(ListCustomersController())
+
+  @app.route('/customers/<id>', methods=['DELETE'])
+  def customer_delete(id):
+    return adapt_flask_route(DeleteCustomerController())
     

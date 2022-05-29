@@ -10,5 +10,5 @@ class ListMotorcyclesController:
     offset = (page - 1) * per_page
     limit = per_page
     total = Motorcycle.select().count()
-    motos = Motorcycle.select().limit(limit).offset(offset)
+    motos = Motorcycle.select().order_by(Motorcycle.created_at.desc()).limit(limit).offset(offset)
     return ok(list(motos.dicts()), headers={"X-Total-Count": total, 'X-Total-Pages': math.ceil(total / per_page)})

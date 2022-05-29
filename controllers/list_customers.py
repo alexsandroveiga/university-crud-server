@@ -9,5 +9,5 @@ class ListCustomersController:
     offset = (page - 1) * per_page
     limit = per_page
     total = Customer.select().count()
-    customers = Customer.select().limit(limit).offset(offset)
+    customers = Customer.select().order_by(Customer.created_at.desc()).limit(limit).offset(offset)
     return ok(list(customers.dicts()), headers={"X-Total-Count": total, 'X-Total-Pages': math.ceil(total / per_page)})
