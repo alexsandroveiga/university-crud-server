@@ -7,3 +7,5 @@ from .create_motorcycle import *
 from .list_motorcycles import *
 from .update_motorcycle import *
 from .delete_motorcycle import *
+from .create_order import *
+from .list_orders import *

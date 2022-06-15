@@ -38,9 +38,32 @@ class Motorcycle(BaseModel):
   engine_capacity = IntegerField()
   maximum_power = IntegerField()
   image_url = CharField()
+  quantity = IntegerField()
+  created_at = DateTimeField(default=peewee.datetime.datetime.now)
+  updated_at = DateTimeField(default=peewee.datetime.datetime.now)
+
+class Order(BaseModel):
+  class Meta:
+    table_name = 'orders'
+
+  id = CharField(primary_key=True, default=uuid4)
+  customer = ForeignKeyField(Customer, backref='orders')
+  created_at = DateTimeField(default=peewee.datetime.datetime.now)
+  updated_at = DateTimeField(default=peewee.datetime.datetime.now)
+
+class OrderMotorcycles(BaseModel):
+  class Meta:
+    table_name = 'orders_motorcycles'
+
+  id = CharField(primary_key=True, default=uuid4)
+  order = ForeignKeyField(Order, backref='order_products')
+  motorcycle = ForeignKeyField(Motorcycle, backref='order_products')
+  quantity = IntegerField()
+  price = FloatField()
   created_at = DateTimeField(default=peewee.datetime.datetime.now)
   updated_at = DateTimeField(default=peewee.datetime.datetime.now)
 
 def create_tables():
   with database:
-    database.create_tables([Customer, Motorcycle])
+    database.create_tables([Customer, Motorcycle, Order, OrderMotorcycles])
+
