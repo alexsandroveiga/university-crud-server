@@ -9,4 +9,4 @@ def adapt_flask_route(controller):
     json = ''
   else:
     json = dumps({ 'error': response['data'] }, default=str)
-  return json, response['statusCode'], response['headers']
+  return Response(json, response['statusCode'], response['headers'], content_type='application/json')
