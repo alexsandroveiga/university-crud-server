@@ -9,3 +9,4 @@ from .update_motorcycle import *
 from .delete_motorcycle import *
 from .create_order import *
 from .list_orders import *
+from .delete_order import *
