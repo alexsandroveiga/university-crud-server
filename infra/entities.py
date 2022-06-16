@@ -2,8 +2,12 @@ import peewee
 from peewee import *
 from uuid import uuid4
 
-DATABASE = 'infra/database.db'
-database = SqliteDatabase(DATABASE)
+### Using SQLite3 as the database
+# DATABASE = 'infra/database.db'
+# database = SqliteDatabase(DATABASE)
+
+### Using PostgreSQL as the database
+database = PostgresqlDatabase('da8s5g3ar1it5v', user='wwcivpdmtpwrug', host='ec2-52-72-99-110.compute-1.amazonaws.com', port=5432, password='3e5a59c23d921f56a8a2815fe060f5613445bec58937de380ccb590a52e5b2c9')
 
 class BaseModel(Model):
   class Meta:
