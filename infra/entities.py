@@ -8,6 +8,7 @@ from uuid import uuid4
 
 ### Using PostgreSQL as the database
 database = PostgresqlDatabase('da8s5g3ar1it5v', user='wwcivpdmtpwrug', host='ec2-52-72-99-110.compute-1.amazonaws.com', port=5432, password='3e5a59c23d921f56a8a2815fe060f5613445bec58937de380ccb590a52e5b2c9')
+# database = PostgresqlDatabase('faculdade', user='postgres', host='localhost', port=5432, password='docker')
 
 class BaseModel(Model):
   class Meta:
@@ -51,7 +52,7 @@ class Order(BaseModel):
     table_name = 'orders'
 
   id = CharField(primary_key=True, default=uuid4)
-  customer = ForeignKeyField(Customer, backref='orders')
+  customer = ForeignKeyField(Customer, null=True, on_delete='SET NULL', on_update='CASCADE', backref='orders')
   created_at = DateTimeField(default=peewee.datetime.datetime.now)
   updated_at = DateTimeField(default=peewee.datetime.datetime.now)
 
@@ -60,8 +61,8 @@ class OrderMotorcycles(BaseModel):
     table_name = 'orders_motorcycles'
 
   id = CharField(primary_key=True, default=uuid4)
-  order = ForeignKeyField(Order, backref='order_products')
-  motorcycle = ForeignKeyField(Motorcycle, backref='order_products')
+  order = ForeignKeyField(Order, null=True, on_delete='SET NULL', on_update='CASCADE', backref='motorcycles')
+  motorcycle = ForeignKeyField(Motorcycle, null=True, on_delete='SET NULL', on_update='CASCADE', backref='orders')
   quantity = IntegerField()
   price = FloatField()
   created_at = DateTimeField(default=peewee.datetime.datetime.now)
