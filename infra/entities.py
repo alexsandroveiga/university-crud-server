@@ -2,12 +2,8 @@ import peewee
 from peewee import *
 from uuid import uuid4
 
-### Using SQLite3 as the database
-# DATABASE = 'infra/database.db'
-# database = SqliteDatabase(DATABASE)
-
-### Using PostgreSQL as the database
-database = PostgresqlDatabase('faculdade', user='postgres', host='localhost', port=5432, password='docker')
+DATABASE = 'infra/database.db'
+database = SqliteDatabase(DATABASE)
 
 class BaseModel(Model):
   class Meta:
